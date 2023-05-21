@@ -1,0 +1,3 @@
+Nombre: Mi nombre
+Direccion: Mi direccion
+Correo electronico: Mi correo
