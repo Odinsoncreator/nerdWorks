@@ -1,3 +1,5 @@
 Nombre: Mi nombre
 Direccion: Mi direccion
 Correo electronico: Mi correo
+rfc:5665545
+Telefono:54156
