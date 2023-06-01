@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class nerdWorks {
-    private static final String RUTA_USUARIOS = "C:\\Users\\baeza\\Documents\\NerdWorks\\Usuarios\\";
     private Usuario usuarioActual;
 
     public static void main(String[] args) {
+        // Impresión de encabezado
         System.out.println(" ");
         System.out.println(" ");
         System.out.println("============================================================");
@@ -23,6 +23,8 @@ public class nerdWorks {
         System.out.println("            oMMd     .oXX:     .dNl    .kNc");
         System.out.println("            ;xx;       .c'      .:.     .:.");
         System.out.println("===========================================================");
+
+        // Creación de instancia de la clase nerdWorks y ejecución del método run()
         nerdWorks app = new nerdWorks();
         app.run();
     }
@@ -33,10 +35,11 @@ public class nerdWorks {
             Tienda tienda = new Tienda();
 
             while (continuar) {
+                // Menú principal
                 System.out.println("Menú:");
                 System.out.println("1. Crear usuario");
-                System.out.println("2. Ingresar Usuario");
-                System.out.println("4. Salir");
+                System.out.println("2. Ir al carrito");
+                System.out.println("3. Salir");
                 System.out.print("<<<====== Ingrese una opción========>>>: ");
 
                 int opcion = scanner.nextInt();
@@ -44,16 +47,18 @@ public class nerdWorks {
 
                 switch (opcion) {
                     case 1:
+                        // Llamada al método crearUsuario()
                         crearUsuario(scanner);
                         break;
 
                     case 2:
-                        System.out.print("Nombre de usuario: ");
-                        String nombreArchivo = scanner.nextLine();
-                        String rutaArchivo = RUTA_USUARIOS + nombreArchivo + ".txt";
-                        leerArchivoTxt(rutaArchivo);
+                        // Carga de productos, mostrar productos y seleccionar productos en la tienda
+                        tienda.cargarProductos("CAMBIA LA RUTA DE TU CARPETA CON EL ARCHIVO .TXT DE PRODUCTOS");
+                        tienda.mostrarProductos();
+                        tienda.seleccionarProductos();
                         break;
                     case 3:
+                        // Salir del programa
                         continuar = false;
                         break;
 
@@ -61,10 +66,11 @@ public class nerdWorks {
                         System.out.println("Opción inválida. Por favor, ingrese una opción válida.");
                 }
                 
-                if (opcion == 1 || opcion == 2) {
+                if (opcion == 1 ) {
+                    // Submenú para la opción "Crear usuario"
                     System.out.println(" ");
                     System.out.println("=============================================");
-                    System.out.println("1. Seleccionar productos");
+                    System.out.println("1. Ir al carrito");
                     System.out.println("2. Salir");
                     System.out.print("<<<====== Ingrese una opción========>>>: ");
                     
@@ -73,11 +79,13 @@ public class nerdWorks {
                     
                     switch (subOpcion) {
                         case 1:
-                            tienda.cargarProductos("C:/Users/baeza/Documents/NerdWorks/Producto");
+                            // Carga de productos, mostrar productos y seleccionar productos en la tienda
+                            tienda.cargarProductos("CAMBIA LA RUTA DE TU CARPETA CON EL ARCHIVO .TXT DE PRODUCTOS");
                             tienda.mostrarProductos();
                             tienda.seleccionarProductos();
                             break;
                         case 2:
+                            // Salir del programa
                             continuar = false;
                             break;
                         default:
@@ -89,17 +97,32 @@ public class nerdWorks {
     }
 
     private void crearUsuario(Scanner scanner) {
-        System.out.println("Creación de usuario");
+        // Captura de información para crear un nuevo usuario
+        System.out.println("=== === === === === === === === === ===");
+        System.out.println(" ");
+        System.out.println("                  REGISTRO             ");
+        System.out.println(" ");
+        System.out.println("=== === === === === === === === === ===");
+        System.out.println(" ");
         System.out.print("Ingrese el nombre del usuario: ");
         String nombre = scanner.nextLine();
 
         System.out.print("Ingrese la dirección del usuario: ");
         String direccion = scanner.nextLine();
 
-        System.out.println("Escribe tu correo de contacto");
+        System.out.print("Escribe tu correo de contacto: ");
         String correoElectronico = scanner.nextLine();
 
+        System.out.print("Ingrese el RFC del usuario: ");
+        String rfc = scanner.nextLine();
+
+        System.out.print("Ingrese el teléfono del usuario: ");
+        String telefono = scanner.nextLine();
+
+        // Creación del objeto Usuario con los datos ingresados y almacenamiento en usuarioActual
         usuarioActual = new Usuario(nombre, direccion, correoElectronico);
+        usuarioActual.setRfc(rfc);
+        usuarioActual.setTelefono(telefono);
         usuarioActual.guardarEnArchivo();
 
         System.out.println("Usuario creado exitosamente: " + usuarioActual.getNombre());
@@ -113,7 +136,7 @@ public class nerdWorks {
                 System.out.println(linea);
             }
         } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
+            System.out.println("Error de archivo: " + e.getMessage());
         }
     }
 }
